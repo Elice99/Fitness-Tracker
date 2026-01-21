@@ -58,12 +58,12 @@ for f in files:
     
     if 'Accelerometer' in f:
         df['set'] = acc_set
-        acc_set = 1
+        acc_set += 1
         acc_df = pd.concat([acc_df, df])
         
     if 'Gyroscope' in f:
         df['set'] = gyr_set
-        gyr_set = 1
+        gyr_set += 1
         gyr_df = pd.concat([gyr_df, df])
     
 # --------------------------------------------------------------
@@ -111,12 +111,12 @@ def read_data_from_files(files):
     
         if 'Accelerometer' in f:
             df['set'] = acc_set
-            acc_set = 1
+            acc_set = +1
             acc_df = pd.concat([acc_df, df])
         
         if 'Gyroscope' in f:
             df['set'] = gyr_set
-            gyr_set = 1
+            gyr_set = +1
             gyr_df = pd.concat([gyr_df, df])
         
     acc_df.index = pd.to_datetime(acc_df['epoch (ms)'], unit='ms')
@@ -195,7 +195,7 @@ data_resampled = pd.concat([df.resample(rule="200ms").agg({
 data_resampled['set'] = data_resampled['set'].astype('int')
 
 data_resampled.info()
-
+data_resampled['set'].nunique()
 # --------------------------------------------------------------
 # Export dataset
 # --------------------------------------------------------------
